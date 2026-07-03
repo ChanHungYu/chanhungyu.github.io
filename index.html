@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chan-Hung Yu</title>
+<meta name="author" content="Chan-Hung Yu">
+<meta name="description" content="Chan-Hung Yu — PhD student at National Taiwan University, Robot Learning Lab. Research on large language models, programmatic policies, reinforcement learning, and planning.">
+<link rel="canonical" href="https://chanhungyu.info/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5f5f1;
+    --paper-raised:#fbfbf9;
+    --ink:#16181d;
+    --ink-soft:#575c66;
+    --ink-faint:#8a8f99;
+    --line:#dcdcd4;
+    --signal:#3958e0;
+    --signal-dim:#e8eaf9;
+    --signal-ink:#26399c;
+    --radius:3px;
+    --serif:"Source Serif 4", Georgia, serif;
+    --sans:"Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--signal-dim);color:var(--signal-ink);}
+
+  a{color:var(--signal-ink);text-decoration:none;border-bottom:1px solid var(--signal-dim);transition:border-color .15s ease, background .15s ease;}
+  a:hover{border-color:var(--signal);background:var(--signal-dim);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--signal);outline-offset:2px;}
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    position:relative;
+    padding:96px 0 64px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .hero-curve{
+    position:absolute;
+    right:-40px; top:20px;
+    width:340px; height:180px;
+    opacity:.55;
+    pointer-events:none;
+  }
+  .hero-curve path{
+    fill:none; stroke:var(--signal); stroke-width:2;
+    stroke-dasharray:600; stroke-dashoffset:600;
+    animation:draw 1.8s ease-out .2s forwards;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .hero-curve path{animation:none; stroke-dashoffset:0;}
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 18px;
+  }
+  .eyebrow::before{content:"// ";color:var(--signal);}
+
+  .hero-grid{display:flex; gap:36px; align-items:flex-start;}
+  .hero-photo{
+    width:112px; height:112px; border-radius:50%;
+    object-fit:cover; flex:none;
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+  }
+  h1{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:clamp(32px,5vw,44px);
+    line-height:1.1;
+    margin:0 0 6px;
+    letter-spacing:-0.01em;
+  }
+  .role{
+    font-family:var(--serif);
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:18px;
+    margin:0 0 18px;
+  }
+  .bio{
+    font-size:16.5px;
+    color:var(--ink-soft);
+    max-width:56ch;
+    margin:0 0 22px;
+  }
+  .bio a{color:var(--ink);border-bottom:1px solid var(--line);}
+  .bio a:hover{color:var(--signal-ink);border-color:var(--signal);}
+
+  .links{display:flex; flex-wrap:wrap; gap:8px 10px; font-family:var(--mono); font-size:13px;}
+  .links a{
+    border:1px solid var(--line); border-bottom:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:6px 11px;
+    color:var(--ink);
+    background:var(--paper-raised);
+  }
+  .links a:hover{border-color:var(--signal); background:var(--signal-dim); color:var(--signal-ink);}
+
+  /* ---------- Sections ---------- */
+  section{padding:56px 0; border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  h2{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin:0 0 26px;
+    display:flex; align-items:center; gap:12px;
+  }
+  h2::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  .interests{font-size:16px; color:var(--ink-soft); max-width:60ch;}
+
+  /* ---------- Publications ---------- */
+  .paper{
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:20px;
+    padding:22px 0;
+    border-top:1px solid var(--line);
+  }
+  .paper:first-of-type{border-top:none; padding-top:0;}
+  .paper-index{
+    font-family:var(--mono);
+    color:var(--ink-faint);
+    font-size:13px;
+    padding-top:3px;
+  }
+  .paper-title{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:19px;
+    line-height:1.3;
+    margin:0 0 6px;
+  }
+  .paper-title a{color:var(--ink); border-bottom:1px solid var(--line);}
+  .paper-title a:hover{color:var(--signal-ink); border-color:var(--signal);}
+  .paper-authors{font-size:14.5px; color:var(--ink-soft); margin:0 0 8px;}
+  .paper-authors .me{color:var(--ink); font-weight:600;}
+  .paper-meta{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  .venue-tag{
+    font-family:var(--mono); font-size:11.5px; letter-spacing:.03em;
+    color:var(--signal-ink); background:var(--signal-dim);
+    border-radius:var(--radius);
+    padding:3px 8px;
+  }
+  .paper-links{font-family:var(--mono); font-size:12.5px; display:flex; gap:14px;}
+  .paper-links a{border-bottom:1px solid var(--signal-dim);}
+  .paper-abstract{
+    font-size:14.5px; color:var(--ink-soft);
+    max-width:64ch;
+    margin:0;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{padding:40px 0 64px;}
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center;
+    flex-wrap:wrap; gap:12px;
+    font-family:var(--mono); font-size:12px; color:var(--ink-faint);
+  }
+  .footer-row a{color:var(--ink-faint); border-bottom:1px solid var(--line);}
+  .footer-row a:hover{color:var(--signal-ink); border-color:var(--signal);}
+
+  @media (max-width:560px){
+    .hero-grid{flex-direction:column-reverse; gap:20px;}
+    .hero-photo{width:88px; height:88px;}
+    .hero-curve{display:none;}
+    .paper{grid-template-columns:1fr;}
+    .paper-index{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="hero-curve" viewBox="0 0 340 180" aria-hidden="true">
+      <path d="M0,150 C 40,148 60,140 80,120 C 100,98 110,60 140,45 C 170,30 190,55 220,40 C 250,25 260,5 300,8 C 315,9 325,10 340,12"/>
+    </svg>
+    <p class="eyebrow">chanhungyu.info</p>
+    <div class="hero-grid">
+      <div>
+        <h1>Chan-Hung Yu</h1>
+        <p class="role">PhD student, National Taiwan University</p>
+        <p class="bio">
+          I'm a member of the <a href="https://nturll.xyz/about" target="_blank" rel="noopener">Robot Learning Lab</a>,
+          advised by Prof. <a href="https://shaohua0116.github.io/" target="_blank" rel="noopener">Shao-Hua Sun</a>.
+          I work on large language models, programmatic policies, reinforcement learning, and planning.
+          Outside the lab, I'm usually deep in anime, music, or video games.
+        </p>
+        <nav class="links" aria-label="Contact and profile links">
+          <a href="mailto:ie71325@gmail.com">Email</a>
+          <a href="https://github.com/ChanHungYu" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://scholar.google.com.tw/citations?user=n5UKVA8AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="https://x.com/ChanhungYu" target="_blank" rel="noopener">X / Twitter</a>
+          <a href="https://www.linkedin.com/in/chan-hung-yu/" target="_blank" rel="noopener">LinkedIn</a>
+        </nav>
+      </div>
+      <img class="hero-photo" src="profile.JPG" alt="Portrait of Chan-Hung Yu" loading="eager">
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- <section id="research">
+    <h2>Research</h2>
+    <p class="interests">
+      I'm interested in machine learning, large language models, programmatic policies, reinforcement learning, and planning.
+      In particular, how LLMs can guide search over structured, interpretable programs, and how
+      language and reasoning can shape better policies for sequential decision-making.
+    </p>
+  </section> -->
+
+  <section id="publications">
+    <h2>Publications</h2>
+
+    <article class="paper">
+      <div class="paper-index">01</div>
+      <div>
+        <h3 class="paper-title">
+          <a href="https://openreview.net/forum?id=EumxjaTQ8F&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICML.cc%2F2026%2FWorkshop%2FDEMO%2FAuthors%23your-submissions)" target="_blank" rel="noopener">Less Tuning, Better Planning: Simplifying Offline Model-Based Planning</a>
+        </h3>
+        <p class="paper-authors">Co Yong*, <span class="me">Chan-Hung Yu*</span>, Shao-Hua Sun
+        <div class="paper-meta">
+          <span class="venue-tag"> ICML 2026 Workshop DEMO Spotlight</span>
+          <span class="paper-links">
+            <a href="https://openreview.net/forum?id=EumxjaTQ8F&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DICML.cc%2F2026%2FWorkshop%2FDEMO%2FAuthors%23your-submissions)" target="_blank" rel="noopener">openreview</a>
+            <!-- <a href="https://github.com/AAAhWei/Preference-Vector" target="_blank" rel="noopener">code</a> -->
+          </span>
+        </div>
+        <p class="paper-abstract">
+          In this work, we introduce Soft Horizon AggRegation for Planning (SHARP), an offline plug-and-play planning method that eliminates the need for an online-tuned planning horizon. Instead of using a fixed horizon across
+          all states, SHARP performs soft horizon aggregation by dynamically weighting returns according to model uncertainty estimated from an ensemble of dynamics models. We further investigate the role of the action proposer and find that stronger offline policies do not necessarily lead to better planning performance. Instead, a simple behavior cloning (BC) policy is often sufficient as an action proposer while avoiding the effort required for extensive policy extraction. Combining these insights, we propose SHARP-BC, which consistently outperforms existing baselines while reducing reliance on extensive online hyperparameter tuning.
+        </p>
+      </div>
+    </article>
+
+    <article class="paper">
+      <div class="paper-index">01</div>
+      <div>
+        <h3 class="paper-title">
+          <a href="https://arxiv.org/abs/2504.20106" target="_blank" rel="noopener">Adaptive Helpfulness-Harmlessness Alignment with Preference Vectors</a>
+        </h3>
+        <p class="paper-authors">Ren-Wei Liang*, Chin-Ting Hsu*, <span class="me">Chan-Hung Yu</span>, Saransh Agrawal, Shih-Cheng Huang, Chieh-Yen Lin, Shang-Tse Chen, Kuan-Hao Huang, Shao-Hua Sun</p>
+        <div class="paper-meta">
+          <span class="venue-tag">EACL 2026 Oral</span>
+          <span class="paper-links">
+            <a href="https://arxiv.org/abs/2504.20106" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/AAAhWei/Preference-Vector" target="_blank" rel="noopener">code</a>
+          </span>
+        </div>
+        <p class="paper-abstract">
+          We propose Preference Vector, a novel framework inspired by task arithmetic. Instead of optimizing multiple preferences within a single objective, we train separate models on individual preferences, extract behavior shifts as preference vectors, and dynamically merge them at test time. This modular approach enables fine-grained, user-controllable preference adjustments and facilitates seamless integration of new preferences without retraining. Experiments show that our proposed Preference Vector framework improves helpfulness without excessive conservatism, allows smooth control over preference trade-offs, and supports scalable multi-preference alignment.
+        </p>
+      </div>
+    </article>
+
+    <article class="paper">
+      <div class="paper-index">01</div>
+      <div>
+        <h3 class="paper-title">
+          <a href="https://arxiv.org/abs/2405.16450" target="_blank" rel="noopener">Synthesizing Programmatic Reinforcement Learning Policies with Large Language Model Guided Search</a>
+        </h3>
+        <p class="paper-authors">Max Liu*, <span class="me">Chan-Hung Yu*</span>, Wei-Hsu Lee, Cheng-Wei Hung, Yen-Chun Chen, Shao-Hua Sun</p>
+        <div class="paper-meta">
+          <span class="venue-tag">ICLR 2025</span>
+          <span class="paper-links">
+            <a href="https://arxiv.org/abs/2405.16450" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/NTURobotLearningLab/LLM-GS" target="_blank" rel="noopener">code</a>
+          </span>
+        </div>
+        <p class="paper-abstract">
+          We address the challenge of LLMs' inability to generate precise and grammatically correct programs in domain-specific languages (DSLs) by proposing a Pythonic-DSL strategy — an LLM is instructed to initially generate Python codes and then convert them into DSL programs. To further optimize the LLM-generated programs, we develop a search algorithm named Scheduled Hill Climbing, designed to efficiently explore the programmatic search space to improve the programs consistently.
+        </p>
+      </div>
+    </article>
+
+    <article class="paper">
+      <div class="paper-index">02</div>
+      <div>
+        <h3 class="paper-title">
+          <a href="https://arxiv.org/abs/2405.06373" target="_blank" rel="noopener">LLM Discussion: Enhancing the Creativity of Large Language Models via Discussion Framework and Role-Play</a>
+        </h3>
+        <p class="paper-authors">Li-Chun Lu*, Shou-Jen Chen*, Tsung-Min Pai, <span class="me">Chan-Hung Yu</span>, Hung-yi Lee, Shao-Hua Sun</p>
+        <div class="paper-meta">
+          <span class="venue-tag">COLM 2024</span>
+          <span class="paper-links">
+            <a href="https://arxiv.org/abs/2405.06373" target="_blank" rel="noopener">arXiv</a>
+            <a href="https://github.com/lawraa/LLM-Discussion" target="_blank" rel="noopener">code</a>
+          </span>
+        </div>
+        <p class="paper-abstract">
+          Large language models (LLMs) have shown exceptional proficiency in natural language processing but often fall short of generating creative and original responses to open-ended questions. To enhance LLM creativity, our key insight is to emulate the human process of inducing collective creativity through engaging discussions with participants from diverse backgrounds and perspectives. To this end, we propose LLM Discussion, a three-phase discussion framework that facilitates vigorous and diverging idea exchanges and ensures convergence to creative answers. Moreover, we adopt a role-playing technique by assigning distinct roles to LLMs to combat the homogeneity of LLMs.
+        </p>
+      </div>
+    </article>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer-row">
+    <span>&copy; 2026 Chan-Hung Yu</span>
+    <span><a href="https://github.com/ChanHungYu/chanhungyu.github.io" target="_blank" rel="noopener">view source</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

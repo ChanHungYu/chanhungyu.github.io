@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "Synthesizing Programmatic Reinforcement Learning Policies with Large Language Model Guided Search"
+date:   2024-05-26 22:21:59 +00:00
+image: /images/llmgs.png
+categories: research
+author: "Chan-Hung Yu"
+authors: "Max Liu*, <strong>Chan-Hung Yu*</strong>, Wei-Hsu Lee, Cheng-Wei Hung, Yen-Chun Chen, Shao-Hua Sun"
+venue: "ICLR 2025"
+arxiv: https://arxiv.org/abs/2405.16450
+code: https://github.com/NTURobotLearningLab/LLM-GS
+---
+We address the challenge of LLMs' inability to generate precise and grammatically correct programs in domain-specific languages (DSLs) by proposing a Pythonic-DSL strategy — an LLM is instructed to initially generate Python codes and then convert them into DSL programs. To further optimize the LLM-generated programs, we develop a search algorithm named Scheduled Hill Climbing, designed to efficiently explore the programmatic search space to improve the programs consistently.
